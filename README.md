@@ -33,7 +33,7 @@ CREATE TABLE netflix
 
 ## Data Analysis
 
-### Number of Movies vs TV Shows
+### 1. Number of Movies vs TV Shows
 
 ```sql
 SELECT 
@@ -42,7 +42,7 @@ SELECT
 FROM netflix
 GROUP BY type;
 ```
-### Most Common Ratings: Movies vs TV Shows
+### 2. Most Common Ratings: Movies vs TV Shows
 
 ```sql
 SELECT 
@@ -58,7 +58,7 @@ FROM netflix
 GROUP BY 1,2) as t1
 WHERE ranking = 1
 ```
-### Movies Released in 2020
+### 3. Movies Released in 2020
 
 ```sql
 SELECT * 
@@ -68,7 +68,7 @@ WHERE
   AND 
   release_year = 2020
 ```
-### Top 5 Countries with the Most Netflix Content
+### 4. Top 5 Countries with the Most Netflix Content
 
 ```sql
 SELECT 
@@ -79,7 +79,7 @@ GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 5
 ```
-### Movie with the Longest Duration on Netflix
+### 5. Movie with the Longest Duration on Netflix
 
 ```sql
 SELECT * 
@@ -90,7 +90,7 @@ WHERE
    duration = (SELECT MAX(duration) FROM netflix)
 ```
 
-### Content Added in the Last 5 Years
+### 6. Content Added in the Last 5 Years
 
 ```sql
 SELECT *
@@ -98,14 +98,14 @@ FROM netflix
 WHERE 
   TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years'
 ```
-### Movies and TV Shows Directed by Rajiv Chilaka
+### 7. Movies and TV Shows Directed by Rajiv Chilaka
 
 ```sql
 SELECT *
 FROM netflix
 WHERE director ILIKE '%Rajiv Chilaka%'
 ```
-### All TV Shows Having Over 5 Seasons
+### 8. All TV Shows Having Over 5 Seasons
 
 ```sql
 SELECT *
@@ -115,7 +115,7 @@ WHERE
    AND 
    SPLIT_PART(duration,' ', 1)::numeric > 5 
 ```
-### Content Count by Genre
+### 9. Content Count by Genre
 
 ```sql
 SELECT
@@ -124,7 +124,7 @@ SELECT
 FROM netflix
 GROUP BY 1
 ```
-### Top 5 Years with Highest Average Content Releases by India on Netflix
+### 10. Top 5 Years with Highest Average Content Releases by India on Netflix
 
 ```sql
 SELECT 
@@ -136,21 +136,21 @@ FROM netflix
 WHERE country = 'India'
 GROUP BY 1
 ```
-### List of Movies Categorized as 'Documentaries'
+### 11. List of Movies Categorized as 'Documentaries'
 
 ```sql
 SELECT * 
 FROM netflix
 WHERE listed_in ILIKE '%documentaries%'
 ```
-### Content Without a Listed Director
+### 12. Content Without a Listed Director
 
 ```sql
 SELECT * 
 FROM netflix
 WHERE director IS NULL
 ```
-### Movies Featuring Paris Hilton in the Last 10 Years
+### 13. Movies Featuring Paris Hilton in the Last 10 Years
 
 ```sql
 SELECT *
@@ -159,7 +159,7 @@ WHERE casts ILIKE '%Paris Hilton%' --ILIKE to search text in a case-insensitive 
       AND
 	  release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10
 ```
-### Top 10 Actors with the Most Movie Appearances in the USA
+### 14. Top 10 Actors with the Most Movie Appearances in the USA
 
 ```sql
 SELECT 
@@ -171,7 +171,7 @@ GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 10
 ```
-### Content is labeled 'Bad' if the description contains 'kill' or 'violence', and 'Good' otherwise, with a count of items in each category
+### 15. Content is labeled 'Bad' if the description contains 'kill' or 'violence', and 'Good' otherwise, with a count of items in each category
 
 ```sql
 WITH new_table  --Creating a new temporary table
